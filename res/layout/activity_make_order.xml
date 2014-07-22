@@ -1,16 +1,134 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MakeOrderActivity" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+	<LinearLayout   
+	    android:id="@+id/container"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    tools:context="com.example.jmm_homework.MakeOrderActivity"
+	    tools:ignore="MergeRootFrame" 
+	    android:orientation="vertical">
+		<TextView 
+		    android:id="@+id/textViewNewPizzaOrder"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/new_pizza_order"
+		    android:textColor="@color/gray"
+		    android:textSize="@dimen/title_text_size"
+		    android:gravity="center_horizontal"
+		    android:padding="3dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-</RelativeLayout>
+		<TextView
+		    android:id="@+id/textViewOrderStatus"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="2dp"
+		    />
+	    
+	    <TextView 
+	        android:id="@+id/textViewPizzaSize"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/pizza_size"
+	        android:layout_margin="15dp"/>
+	    
+	    <RadioGroup
+	        android:id="@+id/radioGroupSize"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" 
+	        android:background="@color/teal">
+	
+	        <RadioButton
+	            android:id="@+id/radioPizzaSizeSmall"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:checked="true"
+	            android:text="@string/pizza_size_small" />
+	
+	        <RadioButton
+	            android:id="@+id/radioPizzaSizeMedium"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/pizza_size_medium" />
+	
+	        <RadioButton
+	            android:id="@+id/radioPizzaSizeBig"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/pizza_size_big" />
+	    </RadioGroup>
+	
+	    <TextView 
+	        android:id="@+id/textViewPizzaType"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/pizza_type"
+	        android:layout_margin="15dp"/>
+	    
+		<RadioGroup
+	        android:id="@+id/radioGroupPizzaType"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" 
+	        android:background="@color/teal">
+	
+	        <RadioButton
+	            android:id="@+id/radioPizzaTypeCapricoza"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:checked="true"
+	            android:text="@string/pizza_type_capricioza" />
+	
+	        <RadioButton
+	            android:id="@+id/radioPizzaTypeMargarita"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/pizza_type_margarita" />
+	
+	        <RadioButton
+	            android:id="@+id/radioPizzaTypeVegetarijana"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/pizza_type_vegetarijana" />
+	    </RadioGroup>
+	    
+		<TextView 
+	        android:id="@+id/textViewAdditional"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/additional"
+	        android:layout_margin="15dp"/>
+	
+		<CheckBox
+		    android:id="@+id/checkBoxExtraCheese"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/extraCheese" />
+	
+		
+		<CheckBox
+		    android:id="@+id/checkBoxKetchup"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/ketchup" />
+		
+		
+		<CheckBox
+		    android:id="@+id/checkBoxMayo"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/mayo" />
+		
+		<fragment android:name="com.example.jmm_homework.BackgroundColorFragment"
+		    android:id="@+id/BackgroundColorFragment"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"/>
+		
+		<Button 
+		    android:id="@+id/buttonContinue"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="10dp"
+		    android:text="@string/make_order"/>
+	</LinearLayout>
+</ScrollView>

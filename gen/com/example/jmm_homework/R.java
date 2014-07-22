@@ -8,7 +8,31 @@
 package com.example.jmm_homework;
 
 public final class R {
+    public static final class array {
+        public static final int background_colors_array=0x7f040002;
+        public static final int football_club_array=0x7f040001;
+        public static final int minimum_goals_array=0x7f040000;
+    }
     public static final class attr {
+    }
+    public static final class color {
+        public static final int aqua=0x7f050009;
+        public static final int black=0x7f05000f;
+        public static final int blue=0x7f05000d;
+        public static final int fuchsia=0x7f050002;
+        public static final int gray=0x7f050005;
+        public static final int green=0x7f05000c;
+        public static final int light_blue=0x7f050010;
+        public static final int lime=0x7f05000a;
+        public static final int maroon=0x7f050008;
+        public static final int navy=0x7f05000e;
+        public static final int olive=0x7f050006;
+        public static final int purple=0x7f050007;
+        public static final int red=0x7f050003;
+        public static final int silver=0x7f050004;
+        public static final int teal=0x7f05000b;
+        public static final int white=0x7f050000;
+        public static final int yellow=0x7f050001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -17,25 +41,90 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
+        public static final int title_text_size=0x7f060002;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int BackgroundColorFragment=0x7f0a0011;
+        public static final int action_settings=0x7f0a0022;
+        public static final int buttonContinue=0x7f0a0012;
+        public static final int buttonNextActivity=0x7f0a001d;
+        public static final int buttonPickContact=0x7f0a001a;
+        public static final int buttonSendMessage=0x7f0a001c;
+        public static final int cancelButton=0x7f0a0018;
+        public static final int checkBoxExtraCheese=0x7f0a000e;
+        public static final int checkBoxKetchup=0x7f0a000f;
+        public static final int checkBoxMayo=0x7f0a0010;
+        public static final int container=0x7f0a0000;
+        public static final int listViewTopScorers=0x7f0a001f;
+        public static final int okButton=0x7f0a0017;
+        public static final int radioGroupPizzaType=0x7f0a0009;
+        public static final int radioGroupSize=0x7f0a0004;
+        public static final int radioPizzaSizeBig=0x7f0a0007;
+        public static final int radioPizzaSizeMedium=0x7f0a0006;
+        public static final int radioPizzaSizeSmall=0x7f0a0005;
+        public static final int radioPizzaTypeCapricoza=0x7f0a000a;
+        public static final int radioPizzaTypeMargarita=0x7f0a000b;
+        public static final int radioPizzaTypeVegetarijana=0x7f0a000c;
+        public static final int spinnerBackgroundColor=0x7f0a0021;
+        public static final int spinnerFootballClub=0x7f0a0016;
+        public static final int spinnerMinimumGoals=0x7f0a0014;
+        public static final int textViewAdditional=0x7f0a000d;
+        public static final int textViewBackgroundColor=0x7f0a0020;
+        public static final int textViewContact=0x7f0a001b;
+        public static final int textViewFootballClub=0x7f0a0015;
+        public static final int textViewMinimumGoals=0x7f0a0013;
+        public static final int textViewNewPizzaOrder=0x7f0a0001;
+        public static final int textViewOrderContent=0x7f0a0019;
+        public static final int textViewOrderStatus=0x7f0a0002;
+        public static final int textViewPizzaSize=0x7f0a0003;
+        public static final int textViewPizzaType=0x7f0a0008;
+        public static final int textViewTopScorersTitle=0x7f0a001e;
     }
     public static final class layout {
         public static final int activity_make_order=0x7f030000;
+        public static final int activity_preferences=0x7f030001;
+        public static final int activity_send_order=0x7f030002;
+        public static final int activity_top_scorers=0x7f030003;
+        public static final int fragment_background_selection=0x7f030004;
+        public static final int fragment_main=0x7f030005;
     }
     public static final class menu {
-        public static final int make_order=0x7f070000;
+        public static final int make_order=0x7f090000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
+        public static final int action_settings=0x7f070004;
+        public static final int additional=0x7f07000f;
+        public static final int app_name=0x7f070000;
+        public static final int background_color=0x7f070008;
+        public static final int cancel=0x7f070002;
+        public static final int choose_contact=0x7f070014;
+        public static final int continue_creating_order=0x7f070018;
+        public static final int do_order=0x7f070015;
+        public static final int extraCheese=0x7f070010;
+        public static final int football_club=0x7f07001a;
+        public static final int hello_world=0x7f070003;
+        public static final int ketchup=0x7f070011;
+        public static final int make_order=0x7f070013;
+        public static final int mayo=0x7f070012;
+        public static final int menu_preferences=0x7f07001b;
+        public static final int minimum_goals=0x7f070019;
+        public static final int new_pizza_order=0x7f070005;
+        public static final int ok=0x7f070001;
+        public static final int pizza_size=0x7f070006;
+        public static final int pizza_size_big=0x7f07000b;
+        public static final int pizza_size_medium=0x7f07000a;
+        public static final int pizza_size_small=0x7f070009;
+        public static final int pizza_type=0x7f070007;
+        public static final int pizza_type_capricioza=0x7f07000c;
+        public static final int pizza_type_margarita=0x7f07000d;
+        public static final int pizza_type_vegetarijana=0x7f07000e;
+        public static final int send_order=0x7f070016;
+        public static final int start_creating_order=0x7f070017;
     }
     public static final class style {
         /** 
@@ -59,10 +148,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f080001;
     }
 }

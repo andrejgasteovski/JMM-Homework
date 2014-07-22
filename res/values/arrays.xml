@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="minimum_goals_array">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+    
+    <string-array name="football_club_array">
+        <item>All</item>
+        <item>Barcelona</item>
+        <item>Chelsea</item>
+        <item>Manchester United</item>
+        <item>Real Madrid</item>
+        <item>Bayern Munich</item>
+    </string-array>
+</resources>
