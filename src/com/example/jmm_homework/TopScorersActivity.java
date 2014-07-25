@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.ExecutionException;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -25,6 +26,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -47,55 +49,34 @@ public class TopScorersActivity extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
+		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_top_scorers);
-		
-		Log.d("custom", "Content view is set");
-		
+	
 		lvTopScorers = (ListView)findViewById(R.id.listViewTopScorers);
 		topScorers = new ArrayList<TopScorer>();
-		
-		Log.d("custom", "List view is inicialized");
-		
+
 		updateFromPreferences();
-		
-		Log.d("custom", "Updated from preferences");
+
+		initializeTopScorersList();
+		refreshTopScrorersList();
 		
 		int layoutID = android.R.layout.simple_list_item_1;
 		aa = new ArrayAdapter<TopScorer>(TopScorersActivity.this, layoutID, topScorers);
-		lvTopScorers.setAdapter(aa);
-		Log.d("custom", "Adapter is set 1");
-		
-		initializeTopScorersList();
-		Log.d("custom", "List initialized");
-		refreshTopScrorersList();
-		Log.d("custom", "List refreshed");
 		aa.notifyDataSetChanged();
-		
-		Log.d("custom", "Top Scorers activity is created");
+		lvTopScorers.setAdapter(aa);
 	}
 	
 	private void refreshTopScrorersList(){
 		ArrayList<TopScorer> newList = new ArrayList<TopScorer>();
 		
-//		for(TopScorer ts : topScorers){
-//			if(selectedClub.equals("All") || selectedClub.equals(ts.getClub())){
-//				if(minimumGoals <= ts.getGoals()){
-//					newList.add(ts);								
-//				}
-//			}
-//		}
-		Log.d("custom", "do tuka stiga");
 		for(TopScorer ts : topScorers){
-			if(ts.getClub().equals("Barcelona")){
-				newList.add(ts);
+			if(selectedClub.equals("All") || selectedClub.equals(ts.getClub())){
+				if(minimumGoals <= ts.getGoals()){
+					newList.add(ts);								
+				}
 			}
-			
 		}
-		
-		Log.d("custom", "i do tuka stiga");
-		
+	
 		topScorers = newList;
 	}
 	
@@ -112,58 +93,29 @@ public class TopScorersActivity extends Activity{
 	
 	private void initializeTopScorersList(){
 		String feed = "https://dl.dropboxusercontent.com/s/ka77pgyfqbi07g4/topscorer.xml";
-		URL url;
-		try {
-			url = new URL(feed);
-			URLConnection connection;
-			connection = url.openConnection();
-			
-			Log.d("custom", "stiga do tuka 1");
-			
-			HttpURLConnection httpConnection = (HttpURLConnection)connection;
-			int responseCode = httpConnection.getResponseCode();
 		
-			Log.d("custom", "stiga do tuka 2");
+		NodeList nl = null;
+		try {
+			Element docEle = new RetrieveTopScorersTask().execute(feed).get();
+			nl = docEle.getElementsByTagName("topscorer");
 			
-			NodeList nl = null;
-			if(responseCode == HttpURLConnection.HTTP_OK){
-					
-				Log.d("custom", "stiga do tuka 3");
-				
-				InputStream in = httpConnection.getInputStream();
-				
-				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				DocumentBuilder db;
-				db = dbf.newDocumentBuilder();
-				
-				Document dom = db.parse(in);
-				Element docEle = dom.getDocumentElement();
-				nl = docEle.getElementsByTagName("topscorer");
-					
-				Log.d("custom", "stiga do tuka 4");
-				
-				if(nl != null && nl.getLength() > 0){
-					for(int i = 0; i < nl.getLength(); i++){
-						Element entry = (Element)nl.item(i);
-							
-						String name = entry.getAttribute("player");
-						String club = entry.getAttribute("participantname");
-						int goals = Integer.parseInt(entry.getAttribute("goals"));
+			if(nl != null && nl.getLength() > 0){
+				for(int i = 0; i < nl.getLength(); i++){
+					Element entry = (Element)nl.item(i);
 						
-						TopScorer ts = new TopScorer(name, club, goals);
-						topScorers.add(ts);						
-					}
+					String name = entry.getAttribute("player");
+					String club = entry.getAttribute("participantname");
+					int goals = Integer.parseInt(entry.getAttribute("goals"));
+					
+					TopScorer ts = new TopScorer(name, club, goals);
+					topScorers.add(ts);						
 				}
-			} 
-		}catch (IOException e) {
-			Log.d("custom", "IO Exception");
-		} catch (SAXException e) {
-			Log.d("custom", "SAX Exception");
-		} catch (ParserConfigurationException e) {
-			Log.d("custom", "Parser Configuration Exception");
+			}
+		} catch (InterruptedException e) {
+			Log.d("custom", "Interrupted exception while executing AsyncTask..");
+		} catch (ExecutionException e) {
+			Log.d("custom", "Execution exception while executing AsyncTask..");
 		}
-			
-		Log.d("custom", "stiga do tuka 5");
 		
 		Collections.sort(topScorers, new Comparator<TopScorer>() {
 			@SuppressLint("NewApi")
@@ -174,8 +126,6 @@ public class TopScorersActivity extends Activity{
 				else return 0;
 			}
 		});
-		
-		Log.d("custom", "stiga do tuka 6");
 	}
 	
 	@Override
@@ -206,6 +156,8 @@ public class TopScorersActivity extends Activity{
 		
 		updateFromPreferences();
 		refreshTopScrorersList();
+
 		aa.notifyDataSetChanged();
+		
 	}
 }
