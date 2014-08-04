@@ -1,38 +1,26 @@
 package com.example.jmm_homework;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -43,6 +31,7 @@ public class TopScorersActivity extends Activity{
 	ArrayAdapter<TopScorer> aa;
 	ArrayList<TopScorer> topScorers;
 	ListView lvTopScorers;
+	Button nextActivity;
 	
 	private String selectedClub;
 	private int minimumGoals;
@@ -51,6 +40,7 @@ public class TopScorersActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_top_scorers);
+		initializeNextActivityButton();
 	
 		lvTopScorers = (ListView)findViewById(R.id.listViewTopScorers);
 		topScorers = new ArrayList<TopScorer>();
@@ -159,5 +149,19 @@ public class TopScorersActivity extends Activity{
 
 		aa.notifyDataSetChanged();
 		
+	}
+	
+	public void initializeNextActivityButton(){
+		Button btnNextActivity = (Button)findViewById(R.id.buttonToDatabaseActivity);
+		btnNextActivity.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Log.d("custom", "Next activity button is pressed");
+				Intent intent = new Intent(TopScorersActivity.this, DatabaseActivity.class);
+				startActivity(intent);
+				Log.d("custom", "Top Scorers activity is started");
+			}
+		});
 	}
 }

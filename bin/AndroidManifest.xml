@@ -36,6 +36,11 @@
             android:name="com.example.jmm_homework.PreferencesActivity"
             android:label="Top Scorer Preferences" >
         </activity>
+        
+        <activity
+            android:name="com.example.jmm_homework.DatabaseActivity"
+            android:label="Database Activity" >
+        </activity>
     </application>
 
 </manifest>
