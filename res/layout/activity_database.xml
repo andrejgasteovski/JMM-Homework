@@ -3,6 +3,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Add new student" />
+	
+    <TextView
+	    android:id="@+id/textView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Student name" />
+	
+    <EditText 
+        android:id="@+id/editTextStudentName"
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+        />
+    
+    <TextView
+	    android:id="@+id/textView4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Student number" />
+	
+    <EditText 
+        android:id="@+id/editTextStudentNumber"
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+        />
+    
+    <Button 
+        android:id="@+id/buttonAddNewStudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add student"
+        />
     
 	<TextView
 	    android:id="@+id/textView1"

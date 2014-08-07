@@ -68,7 +68,4 @@ public class StudentsDataSource {
 		cursor.close();
 		return students;
 	}
-	
-	
-	
 }
