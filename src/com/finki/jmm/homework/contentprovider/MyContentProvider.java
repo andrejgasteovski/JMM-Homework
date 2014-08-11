@@ -1,6 +1,7 @@
 package com.finki.jmm.homework.contentprovider;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -105,15 +106,38 @@ public class MyContentProvider extends ContentProvider{
 	}
 
 	@Override
-	public Uri insert(Uri arg0, ContentValues arg1) {
-		// TODO Auto-generated method stub
-		return null;
+	public Uri insert(Uri uri, ContentValues values) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		String nullColumnHack = null;
+		
+		long id = db.insert(MySQLiteHelper.TABLE_STUDENTS, nullColumnHack, values);
+		
+		//Construct and return the URI of the newly inserted row
+		if(id > -1){
+			Uri insertedId = ContentUris.withAppendedId(CONTENT_URI, id);
+			getContext().getContentResolver().notifyChange(insertedId, null);
+			return insertedId;
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
-	public int update(Uri arg0, ContentValues arg1, String arg2, String[] arg3) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		switch(uriMatcher.match(uri)){
+		case SINGLE_ROW:
+			String rowId = uri.getPathSegments().get(1);
+			selection = MySQLiteHelper.COLUMN_ID + " = " + rowId + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : "");
+		default: break;
+		}
+		
+		int updateCount = db.update(MySQLiteHelper.TABLE_STUDENTS, values, selection, selectionArgs);
+		getContext().getContentResolver().notifyChange(uri, null);
+		return updateCount;
 	}
 
 }

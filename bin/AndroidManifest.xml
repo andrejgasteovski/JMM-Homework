@@ -41,7 +41,7 @@
             android:name="com.example.jmm_homework.DatabaseActivity"
             android:label="Database Activity" >
         </activity>
-        <provider android:name=".MyContentProvider" android:authorities="com.finki.jmm.homework.contentprovider"></provider>
+        <provider android:name="com.finki.jmm.homework.contentprovider.MyContentProvider" android:authorities="com.finki.jmm.homework.contentprovider"></provider>
     </application>
 
 </manifest>
