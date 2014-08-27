@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,18 +41,15 @@ public class DatabaseActivity extends ListActivity{
 		initializeStudentsListWithCR();
 		
 		initializeAddNewStudentButton();
+		initializeNextActivityButton();
 	}
 	
 	private void initializeStudentsListWithCR(){
 		String [] resultColumns = {MySQLiteHelper.COLUMN_ID, MySQLiteHelper.COLUMN_NAME, MySQLiteHelper.COLUMN_INDEKS};
 		Cursor cursor = cr.query(MyContentProvider.CONTENT_URI, resultColumns, null, null, null);
 		
-		Log.d("homework", "stiga do tuka 1");
-		
 		List<Student> students = new ArrayList<Student>();
 		cursor.moveToFirst();
-		
-		Log.d("homework", "stiga do tuka 2");
 		
 		while(!cursor.isAfterLast()){
 			Student student = new Student();
@@ -62,12 +60,8 @@ public class DatabaseActivity extends ListActivity{
 			cursor.moveToNext();
 		}
 		
-		Log.d("homework", "stiga do tuka 3");
-		
 		ArrayAdapter<Student> adapter = new ArrayAdapter<Student>(this, android.R.layout.simple_list_item_1, students);
 		setListAdapter(adapter);
-		
-		Log.d("homework", "stiga do tuka 4");
 	}
 
 	private void initializeStudentsListWithDAO() {
@@ -79,7 +73,6 @@ public class DatabaseActivity extends ListActivity{
 	
 	private void initializeAddNewStudentButton(){
 		Button button = (Button)findViewById(R.id.buttonAddNewStudent);
-		Log.d("homework", "stiga do tuka 6");
 		
 		button.setOnClickListener(new OnClickListener() {
 			@Override
@@ -87,25 +80,17 @@ public class DatabaseActivity extends ListActivity{
 				EditText etStudentName = (EditText)findViewById(R.id.editTextStudentName);
 				EditText etStudentNumber = (EditText)findViewById(R.id.editTextStudentNumber);
 
-				Log.d("homework", "stiga do tuka 7");
-				
 				setNewStudentName(etStudentName.getText().toString());
 				setNewStudentNumber(etStudentNumber.getText().toString());
 			
 				//insertStudentWithDAO();
 				//initializeStudentsListWithDAO();
 
-				Log.d("homework", "stiga do tuka 8");
-				
 				insertStudentWithCR();
 				initializeStudentsListWithCR();
 				
-				Log.d("homework", "stiga do tuka 9");
-				
 				etStudentName.setText("");
 				etStudentNumber.setText("");
-				
-				Log.d("homework", "stiga do tuka 10");
 			}
 		});
 	}
@@ -140,5 +125,19 @@ public class DatabaseActivity extends ListActivity{
 	protected void onPause() {
 		dataSource.close();
 		super.onPause();
+	}
+	
+	private void initializeNextActivityButton(){
+		Button button = (Button)findViewById(R.id.buttonToServicesActivity);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Log.d("custom", "Next activity button is pressed");
+				Intent intent = new Intent(DatabaseActivity.this, ServicesActivity.class);
+				startActivity(intent);
+				Log.d("custom", "Top Scorers activity is started");	
+			}
+		});
 	}
 }
