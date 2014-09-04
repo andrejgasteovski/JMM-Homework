@@ -3,20 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
     
 	<Button 
         android:id="@+id/buttonStartService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start service"
-        android:onClick="startService"
+        android:text="Populate RSS Feed"
+        android:onClick="populateRssFeed"
         />
+
+	<ListView
+	    android:id="@+id/listViewRssFeed"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+	</ListView>
 	
-	<Button 
-        android:id="@+id/buttonStopService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stop service"
-        android:onClick="stopService"
-        />
 </LinearLayout>
