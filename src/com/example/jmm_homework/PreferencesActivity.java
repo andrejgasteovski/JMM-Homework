@@ -23,14 +23,10 @@ public class PreferencesActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_preferences);
+		
 		initializeSpinners();
-		
-		Context context = getApplicationContext();
-		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		updatePreferences();
-		
 		initializeButtons();
 	}
 	
@@ -56,6 +52,8 @@ public class PreferencesActivity extends Activity{
 	 * the method is called when preferences activity is craeted
 	 */
 	private void updatePreferences(){
+		prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		
 		String minimumGoals = prefs.getString(MINIMUM_GOALS, "1");
 		String footballClub = prefs.getString(FOOTBALL_CLUB, "All");
 	
@@ -74,7 +72,6 @@ public class PreferencesActivity extends Activity{
 		Button btnCancel = (Button)findViewById(R.id.cancelButton);
 		
 		btnOk.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				savePreferences();
@@ -84,7 +81,6 @@ public class PreferencesActivity extends Activity{
 		});
 		
 		btnCancel.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				PreferencesActivity.this.setResult(RESULT_CANCELED);
@@ -98,7 +94,6 @@ public class PreferencesActivity extends Activity{
 	 */
 	private void savePreferences(){
 		String minimumGoals =  spMinimumGoals.getSelectedItem().toString();
-		
 		String footballClub = spFootballClub.getSelectedItem().toString();
 		
 		Editor editor = prefs.edit();

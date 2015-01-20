@@ -86,31 +86,21 @@ public class HelloService extends IntentService{
 		try{
 			URL url = new URL(URL_FEED);
 			URLConnection connection = url.openConnection();
-			
-			Log.d("homework", "stiga do tuka 10");
-			
+				
 			HttpURLConnection httpConnection = (HttpURLConnection)connection;
 			int responseCode = httpConnection.getResponseCode();
 			InputStream in = null;
 			
-			Log.d("homework", "stiga do tuka 9");
-			
 			if(responseCode == HttpURLConnection.HTTP_OK){
-				Log.d("homework", "stiga do tuka 12");
 				in = httpConnection.getInputStream();
-				Log.d("homework", "stiga do tuka 13");
 			}
 			
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setInput(in, null);
 			
-			Log.d("homework", "stiga do tuka 5");
-			
 			int eventType = parser.getEventType();
 			FeedMessage currentMessage = null;
 			boolean done = false;
-			
-			Log.d("homework", "stiga do tuka 6");
 			
 			while(eventType != XmlPullParser.END_DOCUMENT && !done){
 				String name = null;
@@ -152,8 +142,6 @@ public class HelloService extends IntentService{
 			Log.d("homework", e.getMessage());
 			throw new RuntimeException(e);
 		}
-		
-		Log.d("homework", "stiga do tuka 4");
 		
 		Intent intent = new Intent(NOTIFICATION);
 		//intent.putStringArrayListExtra(MESSAGES, (ArrayList<String>) messages);

@@ -108,9 +108,11 @@ private static final int PICK_CONTACT_SUBACTIVITY = 1;
 					String [] projection = {Phone.NUMBER};
 					Cursor cursor = getContentResolver().query(contactData, projection, null, null, null);					
 					Log.d("custom", "Cursor initialized");					
+					
 					if(cursor.moveToFirst()){
 						int column = cursor.getColumnIndex(Phone.NUMBER);
 						telNumber = cursor.getString(column);
+						
 						TextView tvContact = (TextView)findViewById(R.id.textViewContact);
 						tvContact.setText("Број за нарачка: " + telNumber);
 						Log.d("custom", "Contact number set in textview");

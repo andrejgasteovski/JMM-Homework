@@ -28,8 +28,8 @@ public class TopScorersActivity extends Activity{
 	private static final int MENU_PREFERENCES = Menu.FIRST + 1;
 	private static final int SHOW_PREFERENCES = 1;
 	
-	ArrayAdapter<TopScorer> aa;
 	ArrayList<TopScorer> topScorers;
+	ArrayAdapter<TopScorer> aa;
 	ListView lvTopScorers;
 	Button nextActivity;
 	
@@ -40,20 +40,29 @@ public class TopScorersActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_top_scorers);
-		initializeNextActivityButton();
 	
-		lvTopScorers = (ListView)findViewById(R.id.listViewTopScorers);
-		topScorers = new ArrayList<TopScorer>();
+		topScorers = getTopScorersList();
 
 		updateFromPreferences();
-
-		initializeTopScorersList();
 		refreshTopScrorersList();
 		
 		int layoutID = android.R.layout.simple_list_item_1;
 		aa = new ArrayAdapter<TopScorer>(TopScorersActivity.this, layoutID, topScorers);
 		aa.notifyDataSetChanged();
+
+		lvTopScorers = (ListView)findViewById(R.id.listViewTopScorers);
 		lvTopScorers.setAdapter(aa);
+		
+		initializeNextActivityButton();
+	}
+	
+	private void updateFromPreferences(){
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		
+		String minimumGoalsString = prefs.getString(PreferencesActivity.MINIMUM_GOALS, "1");
+		
+		minimumGoals = Integer.parseInt(minimumGoalsString);
+		selectedClub = prefs.getString(PreferencesActivity.FOOTBALL_CLUB, "All");
 	}
 	
 	private void refreshTopScrorersList(){
@@ -66,23 +75,12 @@ public class TopScorersActivity extends Activity{
 				}
 			}
 		}
-	
 		topScorers = newList;
 	}
 	
-	private void updateFromPreferences(){
-		Context context = getApplicationContext();
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		
-		String minimumGoalsString = prefs.getString(PreferencesActivity.MINIMUM_GOALS, "1");
-		
-		minimumGoals = Integer.parseInt(minimumGoalsString);
-		selectedClub = prefs.getString(PreferencesActivity.FOOTBALL_CLUB, "All");
-	}
-	
-	
-	private void initializeTopScorersList(){
+	private ArrayList<TopScorer> getTopScorersList(){
 		String feed = "https://dl.dropboxusercontent.com/s/ka77pgyfqbi07g4/topscorer.xml";
+		ArrayList<TopScorer> mTopScorers = new ArrayList<>();
 		
 		NodeList nl = null;
 		try {
@@ -98,7 +96,7 @@ public class TopScorersActivity extends Activity{
 					int goals = Integer.parseInt(entry.getAttribute("goals"));
 					
 					TopScorer ts = new TopScorer(name, club, goals);
-					topScorers.add(ts);						
+					mTopScorers.add(ts);						
 				}
 			}
 		} catch (InterruptedException e) {
@@ -107,7 +105,7 @@ public class TopScorersActivity extends Activity{
 			Log.d("custom", "Execution exception while executing AsyncTask..");
 		}
 		
-		Collections.sort(topScorers, new Comparator<TopScorer>() {
+		Collections.sort(mTopScorers, new Comparator<TopScorer>() {
 			@SuppressLint("NewApi")
 			@Override
 			public int compare(TopScorer o1, TopScorer o2) {
@@ -116,6 +114,8 @@ public class TopScorersActivity extends Activity{
 				else return 0;
 			}
 		});
+		
+		return mTopScorers;
 	}
 	
 	@Override
@@ -163,5 +163,13 @@ public class TopScorersActivity extends Activity{
 				Log.d("custom", "Top Scorers activity is started");
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		updateFromPreferences();
+		refreshTopScrorersList();
 	}
 }

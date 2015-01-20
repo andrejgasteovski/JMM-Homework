@@ -87,11 +87,12 @@ public class ServicesActivity extends Activity{
 		unregisterReceiver(receiver);
 	}
 
-	public void populateRssFeed(View view){
-		Intent intent = new Intent(this, HelloService.class);
-		startService(intent);
-		Toast.makeText(ServicesActivity.this, "Service started", Toast.LENGTH_SHORT).show();
-	}
+	
+//	public void populateRssFeed(View view){
+//		Intent intent = new Intent(this, HelloService.class);
+//		startService(intent);
+//		Toast.makeText(ServicesActivity.this, "Service started", Toast.LENGTH_SHORT).show();
+//	}
 
 	
 //	@Override

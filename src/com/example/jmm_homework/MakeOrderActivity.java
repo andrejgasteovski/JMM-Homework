@@ -1,5 +1,6 @@
 package com.example.jmm_homework;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,26 +48,24 @@ public class MakeOrderActivity extends Activity implements OnBakcgroundColorSele
 		btnMakeOrder = (Button)findViewById(R.id.buttonContinue);
 		
 		initializeMakeOrderButton();
-		initializeFragmentSpinner();
+		//initializeFragmentSpinner();
 	}
 	
 	public void initializeMakeOrderButton(){
 		btnMakeOrder.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.d("custom", "Make Order button is clicked");
+				Log.d("homework", "Make Order button is clicked");
 				Intent intent = new Intent(MakeOrderActivity.this, SendOrderActivity.class);
-				
-				Log.d("custom", "New intent is created");
 				
 				intent.putExtra("pizzaSize", getPizzaSize());
 				intent.putExtra("pizzaType", getPizzaType());
 				intent.putExtra("additionals", getAdditionals());
 				
-				Log.d("custom", "Extras completed");
+				Log.d("homework", "Extras completed");
 				
 				startActivity(intent);
-				Log.d("custom", "Send Order Activity is started");
+				Log.d("homework", "Send Order Activity is started");
 			}
 		});
 	}
@@ -97,13 +96,7 @@ public class MakeOrderActivity extends Activity implements OnBakcgroundColorSele
 		}
 		return result;
 	}
-	
-	public void initializeFragmentSpinner(){
-		Spinner spinner = (Spinner)findViewById(R.id.spinnerBackgroundColor);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.background_colors_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
-	}
+
 	
 	@Override
 	public void onBackgroundColorSelected(String newColor) {
@@ -127,54 +120,51 @@ public class MakeOrderActivity extends Activity implements OnBakcgroundColorSele
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		//Log.d("custom", "Activity onRestoreInstanceState is called");
-		
-		String orderStatus = savedInstanceState.getString("orderStatus");
-		tvOrderStatus.setText(orderStatus);
+		Log.d("homework", "Activity onRestoreInstanceState is called");
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		//Log.d("custom", "Activity onStart is called");
+		Log.d("homework", "Activity onStart is called");
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		//Log.d("custom", "Activity onResume is called");
+		Log.d("homework", "Activity onResume is called");
 	}
 	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		//Log.d("custom", "Activity onSaveInstanceState is called");
+		Log.d("homework", "Activity onSaveInstanceState is called");
 		
-		outState.putString("orderStatus", getResources().getString(R.string.continue_creating_order));
+		tvOrderStatus.setText(R.string.continue_creating_order);
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-		//Log.d("custom", "Activity onPause is called");
+		Log.d("homework", "Activity onPause is called");
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
-		//Log.d("custom", "Activity onStop is called");
+		Log.d("homework", "Activity onStop is called");
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		//Log.d("custom", "Activity onDestroy is called");
+		Log.d("homework", "Activity onDestroy is called");
 	}
 	
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		//Log.d("custom", "Activity onRestart is called");
+		Log.d("homework", "Activity onRestart is called");
 	}
 	
 	@Override
